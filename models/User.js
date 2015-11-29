@@ -23,4 +23,19 @@ UserSchema.methods.validPassword = function(password){
 	return hash === this.hash;
 }
 
+//generate a token for authentication
+UserSchema.methods.generateJWT = function() {
+
+	//tokens expire in 60 days
+	var today = new Date();
+	var exp = new Date(today);
+	exp.setDate(today.getDate() + 60);
+
+	return jwt.sign({
+		_id: this._id,
+		username: this.username,
+		exp: parseInt(exp.getTime() / 1000)
+	}, process.env.MURDER_SECRET);
+};
+
 mongoose.model('User', UserSchema);
