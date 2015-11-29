@@ -10,7 +10,7 @@ var UserSchema = new mongoose.Schema({
 	codeword: String,
 	target: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
 	alive: { type: Boolean, default: true },
-	admin: { type: Boolean, default: false}
+	admin: { type: Boolean, default: false }
 });
 
 
