@@ -20,13 +20,13 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">CSESoc Murder</a>
+					<a class="navbar-brand" href="#/">CSESoc Murder</a>
 				</div>
 
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav navbar-right">
 						<li><a>Login</a></li>
-						<li><a>Register</a></li>
+						<li><a href="#/register">Register</a></li>
 					</ul>
 
 			</div>
@@ -49,6 +49,26 @@
 		<script type="text/ng-template" id="/home.html">
 			This is the home page
 		</script>
+
+		<script type="text/ng-template" id="/register.html">
+			<form ng-submit="register()">
+				<div class="form-group">
+					<label for="name">Name</label>
+					<input type="text" class="form-control" placeholder="John Smith" name="name">
+				</div>
+				<div class="form-group">
+					<label for="username">Username</label>
+					<input type="text" class="form-control" placeholder="JohnSmith" name="username">
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" class="form-control" placeholder="Password" name="password">
+				</div>
+				<button type="submit" class="btn btn-default">Submit</button>
+			</form>
+		</script>
+
+
 
 	</body>
 </html>

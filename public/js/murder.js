@@ -2,6 +2,7 @@ var app = angular.module('murder', ['ui.router']);
 
 
 app.controller('MainCtrl', [function(){}]);
+app.controller('RegisterCtrl', [function(){}]);
 
 app.config([
 	'$stateProvider',
@@ -14,6 +15,12 @@ app.config([
 				url: '/',
 				templateUrl: '/home.html',
 				controller: 'MainCtrl'
+			})
+
+			.state('register', {
+				url: '/register',
+				templateUrl: '/register.html',
+				controller: 'RegisterCtrl'
 			});
 
 
