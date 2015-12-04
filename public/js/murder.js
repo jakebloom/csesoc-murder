@@ -52,7 +52,7 @@ app.factory('auth', ['$http', '$window', function($http, $window){
 		$window.localStorage.removeItem['murder-token'];
 	}
 
-	auth.register = function(){
+	auth.register = function(user){
 		return $http.post('/users/register', user).success(function(data){
 			auth.saveToken(data.token);
 		});
@@ -88,6 +88,14 @@ app.controller('AuthCtrl', [
 	}]
 );
 
+app.controller('NavCtrl', ['$scope', 'auth',
+	function($scope, auth){
+		$scope.isLoggedIn = auth.isLoggedIn;
+		$scope.currentUser = auth.currentUser;
+		$scope.logout = auth.logout;
+	}]
+);
+
 app.config([
 	'$stateProvider',
 	'$urlRouterProvider',
@@ -105,12 +113,12 @@ app.config([
 				url: '/register',
 				templateUrl: '/register.html',
 				controller: 'AuthCtrl',
-				onEnter: ['$state', 'auth', function($state, $auth){
+				onEnter: ['$state', 'auth', function($state, auth){
 					if(auth.isLoggedIn()){
 						$state.go('home');
 					}
 				}]
-			});
+			})
 
 			.state('login', {
 				url: '/login',
