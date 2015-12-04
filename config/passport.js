@@ -9,11 +9,11 @@ passport.use(new LocalStrategy(function(username, password, done) {
       if (err) { return done(err); }
    
       if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
+        return done(null, false, { message: 'User does not exist' });
       }
    
       if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
+        return done(null, false, { message: 'Incorrect password' });
       }
    
       return done(null, user);
