@@ -6,6 +6,7 @@
 		<link rel='stylesheet' href='/css/style.css' />
 		<link rel='stylesheet' href='/css/bootstrap.min.css' />
 		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
 		<script src="/js/murder.js"></script>
 	</head>
 
@@ -31,13 +32,23 @@
 			</div>
 		</nav>
 
-
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-4 col-xs-offset-4">
+					<ui-view></ui-view>
+				</div>
+			</div>
+		</div>
 
 		<!-- jQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
 		<!-- Bootstrap's js -->
 		<script src="/js/bootstrap.min.js"></script>
+
+		<script type="text/ng-template" id="/home.html">
+			This is the home page
+		</script>
 
 	</body>
 </html>
