@@ -50,7 +50,7 @@ app.factory('auth', ['$http', '$window', function($http, $window){
 	};
 
 	auth.logout = function(){
-		$window.localStorage.removeItem['murder-token'];
+		$window.localStorage.removeItem('murder-token');
 	}
 
 	auth.register = function(user){
@@ -61,8 +61,6 @@ app.factory('auth', ['$http', '$window', function($http, $window){
 
 	return auth;
 }]);
-
-app.controller('MainCtrl', [function(){}]);
 
 app.controller('AuthCtrl', [
 	'$scope', '$state', 'auth',
@@ -106,8 +104,7 @@ app.config([
 
 			.state('home', {
 				url: '/',
-				templateUrl: '/home.html',
-				controller: 'MainCtrl'
+				templateUrl: '/home.html'
 			})
 
 			.state('register', {
