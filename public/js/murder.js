@@ -1,6 +1,6 @@
 var app = angular.module('murder', ['ui.router']);
 
-app.factory('user', ['$http', 'auth', function($http, auth){
+app.factory('userService', ['$http', 'auth', function($http, auth){
 	var o = {};
 
 	o.getMe = function(){
@@ -10,6 +10,11 @@ app.factory('user', ['$http', 'auth', function($http, auth){
 			return res.data;
 		});
 	};
+
+	o.kill = function(){
+		console.log("KILLING");
+		return true;
+	}
 
 	return o;
 }]);
@@ -83,13 +88,13 @@ app.controller('AuthCtrl', [
 			});
 		};
 
-
 	}]
 );
 
-app.controller('UserCtrl', ['$scope', 'user', 
-	function($scope, user){
-		$scope.user = user;
+app.controller('UserCtrl', ['$scope', 'current_user', 'userService',
+	function($scope, current_user, userService){
+		$scope.user = current_user;
+		$scope.kill = userService.kill;
 	}]
 );
 
@@ -145,8 +150,8 @@ app.config([
 					}
 				}],
 				resolve: {
-					user: ['user', function(user){
-						return user.getMe();
+					current_user: ['userService', function(userService){
+						return userService.getMe();
 					}]
 				}
 			});

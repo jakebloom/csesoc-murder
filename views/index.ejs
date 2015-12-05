@@ -101,7 +101,7 @@
 			<p><strong>Codeword:</strong>{{ user.codeword }} (give this to the person who kills you)</p>
 			<p>{{ user.alive ? "You are still alive" : "You are dead. rip." }}</p>
 
-			<form class="form-inline">
+			<form class="form-inline" ng-submit="kill()">
 				<div class="form-group">
 					<label for="kill">Killed someone? Put their codeword here: </label>
 					<input type="text" class="form-control" placeholder="e.g. wobbegong">
