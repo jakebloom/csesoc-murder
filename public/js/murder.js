@@ -11,9 +11,12 @@ app.factory('userService', ['$http', 'auth', function($http, auth){
 		});
 	};
 
-	o.kill = function(){
-		console.log("KILLING");
-		return true;
+	o.kill = function(codeword){
+		return $http.post('/users/kill', codeword, {
+				headers: {Authorization: 'Bearer ' + auth.getToken()}
+			}).then(function(res){
+				return res.data;
+			});
 	}
 
 	return o;
@@ -93,8 +96,19 @@ app.controller('AuthCtrl', [
 
 app.controller('UserCtrl', ['$scope', 'current_user', 'userService',
 	function($scope, current_user, userService){
+		
+		$scope.codeword = "";
 		$scope.user = current_user;
-		$scope.kill = userService.kill;
+		
+		$scope.kill = function(){
+			userService.kill($scope.codeword, function(result){
+				if (result === true) {
+					$scope.success = true;
+				} else if (result === false){
+					$scope.error = true;
+				}
+			});
+		};
 	}]
 );
 
