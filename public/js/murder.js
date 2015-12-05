@@ -1,13 +1,13 @@
 var app = angular.module('murder', ['ui.router']);
 
-app.factory('users', ['$http', function(){
-	var o = {
-		users: []
-	};
+app.factory('user', ['$http', 'auth', function($http, auth){
+	var o = {};
 
-	o.getAll = function() {
-		return $http.get('/users').success(function(data){
-			angular.copy(data, o.users);
+	o.getMe = function(){
+		return $http.get('/users/me', {
+			headers: {Authorization: 'Bearer ' + auth.getToken()}
+		}).then(function(res){
+			return res.data;
 		});
 	};
 
@@ -87,6 +87,12 @@ app.controller('AuthCtrl', [
 	}]
 );
 
+app.controller('UserCtrl', ['$scope', 'user', 
+	function($scope, user){
+		$scope.user = user;
+	}]
+);
+
 app.controller('NavCtrl', ['$scope', 'auth',
 	function($scope, auth){
 		$scope.isLoggedIn = auth.isLoggedIn;
@@ -128,6 +134,22 @@ app.config([
 					}
 				}]
 			})
+
+			.state('me', {
+				url: '/me',
+				templateUrl: '/me.html',
+				controller: 'UserCtrl',
+				onEnter: ['$state', 'auth', function($state, auth){
+					if(!auth.isLoggedIn()){
+						$state.go('home');
+					}
+				}],
+				resolve: {
+					user: ['user', function(user){
+						return user.getMe();
+					}]
+				}
+			});
 
 
 		$urlRouterProvider.otherwise('/');
