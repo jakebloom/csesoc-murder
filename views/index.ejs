@@ -95,7 +95,19 @@
 		</script>
 
 		<script type="text/ng-template" id="/me.html">
-			{{ user.name }}, {{ user.username }}, {{ user.target }}, {{ user.alive }}
+			<h3>Hello, {{ user.name }}</h3>
+			<p><strong>Username:</strong> {{ user.username }}</p>
+			<p><strong>Target:</strong> {{ user.target ? user.target : "Nobody... yet..." }}</p>
+			<p><strong>Codeword:</strong>{{ user.codeword }} (give this to the person who kills you)</p>
+			<p>{{ user.alive ? "You are still alive" : "You are dead. rip." }}</p>
+
+			<form class="form-inline">
+				<div class="form-group">
+					<label for="kill">Killed someone? Put their codeword here: </label>
+					<input type="text" class="form-control" placeholder="e.g. wobbegong">
+				</div>
+				<button type="submit" class="btn btn-default">Kill</button>
+			</form>			
 		</script>
 
 	</body>
