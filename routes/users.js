@@ -41,6 +41,10 @@ router.post('/kill', auth, function(req, res, next){
 			return res.status(400).json({message: "You don't have a target to kill"});
 		}
 
+		if (!user.alive){
+			return res.status(400).json({message: "You are not a zombie"});
+		}
+
 		var target = user.target;
 
 		if (target.codeword != req.body.codeword){

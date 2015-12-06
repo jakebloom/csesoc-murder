@@ -108,8 +108,10 @@ app.controller('UserCtrl', ['$scope', 'current_user', 'userService',
 			userService.kill($scope.code, function(status, data){
 				$scope.message = data.message;
 				if (status){
+					$scope.error = false;
 					$scope.success = true;
 				} else {
+					$scope.success = false;
 					$scope.error = true;
 				}
 			});
