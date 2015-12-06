@@ -100,7 +100,12 @@
 			<p><strong>Target:</strong> {{ user.target ? user.target : "Nobody... yet..." }}</p>
 			<p><strong>Codeword:</strong>{{ user.codeword }} (give this to the person who kills you)</p>
 			<p>{{ user.alive ? "You are still alive" : "You are dead. rip." }}</p>
-
+			<div ng-show="error" class="alert alert-danger row">
+				<span>{{ message }}</span>
+			</div>
+			<div ng-show="success" class="alert alert-success row">
+				<span>{{ message }}</span>
+			</div>
 			<form class="form-inline" ng-submit="kill()">
 				<div class="form-group">
 					<label for="kill">Killed someone? Put their codeword here: </label>
@@ -108,12 +113,7 @@
 				</div>
 				<button type="submit" class="btn btn-default">Kill</button>
 			</form>			
-			<div ng-show="error" class="alert alert-danger row">
-				<span>Incorrect codeword.</span>
-			</div>
-			<div ng-show="success" class="alert alert-danger row">
-				<span>Correct! Target is dead. Press F to pay respects</span>
-			</div>
+
 
 		</script>
 

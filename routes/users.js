@@ -35,11 +35,30 @@ router.post('/kill', auth, function(req, res, next){
 	var username = req.payload.username;
 
 	User.findOne({'username': username}, function(err, user){
-		if (err){return err;}
+		if (err){return next(err);}
 	
 		if (!user.target){
 			return res.status(400).json({message: "You don't have a target to kill"});
 		}
+
+		var target = user.target;
+
+		if (target.codeword != req.body.codeword){
+			return res.status(400).json({message: "Incorrect codeword."});
+		}
+
+		target.alive = false;
+		user.target = target.target;
+
+		target.save(function(err){
+			if (err){return next(err);}
+
+			user.save(function(err){
+				if (err){return next(err);}
+
+				return res.status(200).json({message: "Target is dead. Press f to pay respects."});
+			});
+		});
 
 	});
 
