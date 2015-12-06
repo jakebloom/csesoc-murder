@@ -23,11 +23,13 @@ router.get('/', function(req, res, next) {
 /* view yourself */
 router.get('/me', auth, function(req, res, next){
 	var username = req.payload.username;
-	User.findOne({'username': username}).populate('target').exec(function(err, user){
-		if (err){return err;}
+	User.findOne({'username': username}).lean().populate('target', 'name').exec(
+		function(err, user){
+			if (err){return err;}
 
-		return res.json(user);
-	});
+			return res.json(user);
+		}
+	);
 });
 
 /* Kill your target */
