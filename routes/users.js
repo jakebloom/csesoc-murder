@@ -13,7 +13,7 @@ var passport = require('passport');
 /* GET users listing. Remove this soon.*/
 router.get('/', function(req, res, next) {
 
-	User.find(function(err, users){
+	User.find({}).populate('target').exec(function(err, users){
 		if (err) {return next(err);}
 
 		res.json(users);
@@ -23,7 +23,7 @@ router.get('/', function(req, res, next) {
 /* view yourself */
 router.get('/me', auth, function(req, res, next){
 	var username = req.payload.username;
-	User.findOne({'username': username}, function(err, user){
+	User.findOne({'username': username}).populate('target').exec(function(err, user){
 		if (err){return err;}
 
 		return res.json(user);
@@ -34,7 +34,7 @@ router.get('/me', auth, function(req, res, next){
 router.post('/kill', auth, function(req, res, next){
 	var username = req.payload.username;
 
-	User.findOne({'username': username}, function(err, user){
+	User.findOne({'username': username}).populate('target').exec(function(err, user){
 		if (err){return next(err);}
 	
 		if (!user.target){
