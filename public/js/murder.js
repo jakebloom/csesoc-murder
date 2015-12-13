@@ -21,7 +21,7 @@ app.factory('userService', ['$http', 'auth', function($http, auth){
 				callback(false, res.data);
 				return res.data;
 			});
-	}
+	};
 
 	return o;
 }]);
@@ -31,11 +31,11 @@ app.factory('auth', ['$http', '$window', function($http, $window){
 
 	auth.saveToken = function(token){
 		$window.localStorage['murder-token'] = token;
-	}
+	};
 
 	auth.getToken = function(){
 		return $window.localStorage['murder-token'];
-	}
+	};
 
 	auth.isLoggedIn = function(){
 		var token = auth.getToken();
@@ -44,7 +44,7 @@ app.factory('auth', ['$http', '$window', function($http, $window){
 
 		var payload = JSON.parse($window.atob(token.split('.')[1]));
 		return payload.exp > Date.now() / 1000;
-	}
+	};
 
 	auth.currentUser = function(){
 		if(auth.isLoggedIn()){
@@ -63,13 +63,22 @@ app.factory('auth', ['$http', '$window', function($http, $window){
 
 	auth.logout = function(){
 		$window.localStorage.removeItem('murder-token');
-	}
+	};
 
 	auth.register = function(user){
 		return $http.post('/users/register', user).success(function(data){
 			auth.saveToken(data.token);
 		});
-	}
+	};
+
+	auth.isAdmin = function(){
+		if (!auth.isLoggedIn()){return false;}
+
+		var token = auth.getToken();
+		var payload = JSON.parse($window.atob(token.split('.')[1]));
+
+		return payload.admin;
+	};
 
 	return auth;
 }]);
@@ -124,6 +133,7 @@ app.controller('NavCtrl', ['$scope', 'auth',
 		$scope.isLoggedIn = auth.isLoggedIn;
 		$scope.currentUser = auth.currentUser;
 		$scope.logout = auth.logout;
+		$scope.isAdmin = auth.isAdmin;
 	}]
 );
 

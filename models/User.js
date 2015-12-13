@@ -22,7 +22,7 @@ UserSchema.methods.setPassword = function(password){
 UserSchema.methods.validPassword = function(password){
 	var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
 	return hash === this.hash;
-}
+};
 
 //generate a token for authentication
 UserSchema.methods.generateJWT = function() {
@@ -35,6 +35,7 @@ UserSchema.methods.generateJWT = function() {
 	return jwt.sign({
 		_id: this._id,
 		username: this.username,
+		admin: this.admin,
 		exp: parseInt(exp.getTime() / 1000)
 	}, process.env.MURDER_SECRET);
 };
