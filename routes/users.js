@@ -20,12 +20,21 @@ router.get('/', function(req, res, next) {
 	});
 });
 
+/* Get players who are still alive*/
+router.get('/alive', function(req, res, next){
+	User.find({alive: true}).select('name').exec(function(err, users){
+		if (err) {return next(err)};
+
+		res.json(users);
+	})
+});
+
 /* view yourself */
 router.get('/me', auth, function(req, res, next){
 	var username = req.payload.username;
 	User.findOne({'username': username}).lean().populate('target', 'name').exec(
 		function(err, user){
-			if (err){return err;}
+			if (err){return next(err);}
 
 			return res.json(user);
 		}
