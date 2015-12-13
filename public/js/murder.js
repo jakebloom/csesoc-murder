@@ -23,6 +23,12 @@ app.factory('userService', ['$http', 'auth', function($http, auth){
 			});
 	};
 
+	o.getAlive = function(){
+		return $http.get('/users/alive').then(function(res){
+			return res.data;
+		});
+	};
+
 	return o;
 }]);
 
@@ -137,6 +143,12 @@ app.controller('NavCtrl', ['$scope', 'auth',
 	}]
 );
 
+app.controller('HomeCtrl', ['$scope', 'alive_users', 
+	function($scope, alive_users){
+		$scope.alive_users = alive_users;
+	}]
+);
+
 app.config([
 	'$stateProvider',
 	'$urlRouterProvider',
@@ -146,7 +158,13 @@ app.config([
 
 			.state('home', {
 				url: '/',
-				templateUrl: '/home.html'
+				templateUrl: '/home.html',
+				controller: 'HomeCtrl',
+				resolve: {
+					alive_users: ['userService', function(userService){
+						return userService.getAlive();
+					}]
+				}
 			})
 
 			.state('register', {

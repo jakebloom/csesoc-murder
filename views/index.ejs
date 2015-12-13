@@ -48,7 +48,20 @@
 
 		<script type="text/ng-template" id="/home.html">
 			<h3>Welcome</h3>
-			Something something description of murder
+			<p>The following players are still alive</p>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Name</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="user in alive_users | orderBy: 'name'">
+						<td>{{user.name}}</td>
+					</tr>
+				</tbody>
+			</table>
+				
 		</script>
 
 		<script type="text/ng-template" id="/register.html">
