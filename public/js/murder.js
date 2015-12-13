@@ -185,6 +185,16 @@ app.config([
 						return userService.getMe();
 					}]
 				}
+			})
+
+			.state('admin', {
+				url: '/admin',
+				templateUrl: '/admin.html',
+				onEnter: ['$state', 'auth', function($state, auth){
+					if (!auth.isLoggedIn()){
+						$state.go('home');
+					}
+				}]
 			});
 
 
