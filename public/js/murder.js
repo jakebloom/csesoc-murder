@@ -89,6 +89,18 @@ app.factory('auth', ['$http', '$window', function($http, $window){
 	return auth;
 }]);
 
+app.factory('admin', ['$http',
+	function($http){
+		var admin = {}
+
+		admin.assign = function(callback){};
+
+		admin.start = function(callback){};
+
+
+		return admin;
+}]);
+
 app.controller('AuthCtrl', [
 	'$scope', '$state', 'auth',
 	function($scope, $state, auth){
@@ -146,6 +158,36 @@ app.controller('NavCtrl', ['$scope', 'auth',
 app.controller('HomeCtrl', ['$scope', 'alive_users', 
 	function($scope, alive_users){
 		$scope.alive_users = alive_users;
+	}]
+);
+
+app.controller('AdminCtrl', ['$scope', 'admin',
+	function($scope, admin){
+		$scope.assign = function(){
+			admin.assign(function(status, data){
+				$scope.message = data.message;
+				if (status){
+					$scope.error = false;
+					$scope.success = true;
+				} else {
+					$scope.success = false;
+					$scope.error = true;
+				}
+			})
+		};
+
+		$scope.start = function(){
+			admin.start(function(status, data){
+				$scope.message = data.message;
+				if (status){
+					$scope.error = false;
+					$scope.success = true;
+				} else {
+					$scope.success = false;
+					$scope.error = true;
+				}
+			})
+		};
 	}]
 );
 
@@ -208,8 +250,9 @@ app.config([
 			.state('admin', {
 				url: '/admin',
 				templateUrl: '/admin.html',
+				controller: 'AdminCtrl',
 				onEnter: ['$state', 'auth', function($state, auth){
-					if (!auth.isLoggedIn()){
+					if (!auth.isAdmin()){
 						$state.go('home');
 					}
 				}]
