@@ -89,11 +89,21 @@ app.factory('auth', ['$http', '$window', function($http, $window){
 	return auth;
 }]);
 
-app.factory('admin', ['$http',
-	function($http){
+app.factory('admin', ['$http', 'auth',
+	function($http, auth){
 		var admin = {}
 
-		admin.assign = function(callback){};
+		admin.assign = function(callback){
+			return $http.get('/admin/assign', {
+					headers: {Authorization: 'Bearer ' + auth.getToken()}
+				}).then(function(res){
+					callback(true, res.data);
+					return res.data;
+				}, function(res){
+					callback(false, res.data);
+					return res.data;
+				});
+		};
 
 		admin.start = function(callback){};
 
