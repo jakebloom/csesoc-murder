@@ -9,23 +9,12 @@ var auth = jwt({secret: process.env.MURDER_SECRET, userProperty: 'payload'});
 
 var passport = require('passport');
 
-
-/* GET users listing. Remove this soon.*/
-router.get('/', function(req, res, next) {
-
-	User.find({}).populate('target').exec(function(err, users){
-		if (err) {return next(err);}
-
-		res.json(users);
-	});
-});
-
 /* Get players who are still alive*/
 router.get('/alive', function(req, res, next){
 	User.find({alive: true}).select('name').exec(function(err, users){
 		if (err) {return next(err)};
 
-		res.json(users);
+		return res.json(users);
 	})
 });
 

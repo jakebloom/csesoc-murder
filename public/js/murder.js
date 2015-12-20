@@ -105,7 +105,17 @@ app.factory('admin', ['$http', 'auth',
 				});
 		};
 
-		admin.start = function(callback){};
+		admin.start = function(callback){
+			return $http.get('/admin/start', {
+					headers: {Authorization: 'Bearer ' + auth.getToken()}
+				}).then(function(res){
+					callback(true, res.data);
+					return res.data;
+				}, function(res){
+					callback(false, res.data);
+					return res.data;
+				});
+		};
 
 
 		return admin;
