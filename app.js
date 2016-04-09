@@ -14,7 +14,8 @@ require('./models/User');
 require('./config/passport');
 
 //Connect to database
-mongoose.connect('mongodb://mongodb/murder');
+console.log("Connecting to database");
+mongoose.connect('mongodb://localhost/murder');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
