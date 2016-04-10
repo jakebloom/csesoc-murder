@@ -5,41 +5,11 @@
 		<title>CSESoc Murder</title>
 		<link rel='stylesheet' href='/css/style.css' />
 		<link rel='stylesheet' href='/css/bootstrap.min.css' />
-		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
-		<script src="/js/murder.js"></script>
 	</head>
 
-	<body ng-app="murder">
-		<nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="NavCtrl">
-			<div class="container-fluid">
-    			<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#/">CSESoc Murder</a>
-				</div>
-
-				<div class="collapse navbar-collapse">
-					<ul class="nav navbar-nav navbar-right">
-						<li ng-show="isAdmin()"><a href="#/admin">Admin</a></li>
-						<li ng-show="isLoggedIn()"><a href="#/me">{{ currentUser() }}</a></li>
-						<li ng-show="isLoggedIn()"><a href="#/" ng-click="logout()">Log Out</a></li>
-						<li ng-hide="isLoggedIn()"><a href="#/login">Login</a></li>
-						<li ng-hide="isLoggedIn()"><a href="#/register">Register</a></li>
-					</ul>
-			</div>
-		</nav>
-
-		<div class="container">
-			<div class="row">
-				<ui-view></ui-view>
-			</div>
-		</div>
-
+	<body>
+		<div id="app"></div>
+		<script src="/bundle.js"></script>
 		<!-- jQuery -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
