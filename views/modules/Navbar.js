@@ -28,7 +28,7 @@ export default React.createClass({
 						</div>
 					</div>
 				</nav>
-				<div className="container">{this.props.children}</div>
+				<div className="row">{this.props.children}</div>
 			</div>
 		)
 	}
