@@ -58,12 +58,35 @@
 
 	var _Navbar2 = _interopRequireDefault(_Navbar);
 
+	var _Home = __webpack_require__(224);
+
+	var _Home2 = _interopRequireDefault(_Home);
+
+	var _Register = __webpack_require__(225);
+
+	var _Register2 = _interopRequireDefault(_Register);
+
+	var _LogIn = __webpack_require__(226);
+
+	var _LogIn2 = _interopRequireDefault(_LogIn);
+
+	var _Me = __webpack_require__(227);
+
+	var _Me2 = _interopRequireDefault(_Me);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	(0, _reactDom.render)(_react2.default.createElement(
 		_reactRouter.Router,
-		{ history: _reactRouter.browserHistory },
-		_react2.default.createElement(_reactRouter.Route, { path: '/', component: _Navbar2.default })
+		{ history: _reactRouter.hashHistory },
+		_react2.default.createElement(
+			_reactRouter.Route,
+			{ path: '/', component: _Navbar2.default },
+			_react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: '/register', component: _Register2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: '/login', component: _LogIn2.default }),
+			_react2.default.createElement(_reactRouter.Route, { path: '/me', component: _Me2.default })
+		)
 	), document.getElementById('app'));
 
 /***/ },
@@ -25106,84 +25129,402 @@
 		displayName: 'Navbar',
 		render: function render() {
 			return _react2.default.createElement(
-				'nav',
-				{ className: 'navbar navbar-inverse navbar-fixed-top' },
+				'div',
+				null,
 				_react2.default.createElement(
-					'div',
-					{ className: 'container-fluid' },
+					'nav',
+					{ className: 'navbar navbar-inverse navbar-fixed-top' },
 					_react2.default.createElement(
 						'div',
-						{ className: 'navbar-header' },
+						{ className: 'container-fluid' },
 						_react2.default.createElement(
-							'button',
-							{ type: 'button', className: 'navbar-toggle collapsed', 'data-toggle': 'collapse', 'data-target': '#bs-example-navbar-collapse-1', 'aria-expanded': 'false' },
+							'div',
+							{ className: 'navbar-header' },
 							_react2.default.createElement(
-								'span',
-								{ className: 'sr-only' },
-								'Toggle navigation'
+								'button',
+								{ type: 'button', className: 'navbar-toggle collapsed', 'data-toggle': 'collapse', 'data-target': '#bs-example-navbar-collapse-1', 'aria-expanded': 'false' },
+								_react2.default.createElement(
+									'span',
+									{ className: 'sr-only' },
+									'Toggle navigation'
+								),
+								_react2.default.createElement('span', { className: 'icon-bar' }),
+								_react2.default.createElement('span', { className: 'icon-bar' }),
+								_react2.default.createElement('span', { className: 'icon-bar' })
 							),
-							_react2.default.createElement('span', { className: 'icon-bar' }),
-							_react2.default.createElement('span', { className: 'icon-bar' }),
-							_react2.default.createElement('span', { className: 'icon-bar' })
+							_react2.default.createElement(
+								_reactRouter.Link,
+								{ to: '/', className: 'navbar-brand' },
+								'CSESoc Murder'
+							)
 						),
 						_react2.default.createElement(
-							_reactRouter.Link,
-							{ to: '/', className: 'navbar-brand' },
-							'CSESoc Murder'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'collapse navbar-collapse' },
-						_react2.default.createElement(
-							'ul',
-							{ className: 'nav navbar-nav navbar-right' },
+							'div',
+							{ className: 'collapse navbar-collapse' },
 							_react2.default.createElement(
-								'li',
-								null,
+								'ul',
+								{ className: 'nav navbar-nav navbar-right' },
 								_react2.default.createElement(
-									_reactRouter.Link,
-									{ to: '/' },
-									'Admin'
-								)
-							),
-							_react2.default.createElement(
-								'li',
-								null,
+									'li',
+									null,
+									_react2.default.createElement(
+										_reactRouter.Link,
+										{ to: '/' },
+										'Admin'
+									)
+								),
 								_react2.default.createElement(
-									_reactRouter.Link,
-									{ to: '/' },
-									'current user'
-								)
-							),
-							_react2.default.createElement(
-								'li',
-								null,
+									'li',
+									null,
+									_react2.default.createElement(
+										_reactRouter.Link,
+										{ to: '/me' },
+										'current user'
+									)
+								),
 								_react2.default.createElement(
-									_reactRouter.Link,
-									{ to: '/' },
-									'Log Out'
-								)
-							),
-							_react2.default.createElement(
-								'li',
-								null,
+									'li',
+									null,
+									_react2.default.createElement(
+										_reactRouter.Link,
+										{ to: '/' },
+										'Log Out'
+									)
+								),
 								_react2.default.createElement(
-									_reactRouter.Link,
-									{ to: '/' },
-									'Login'
-								)
-							),
-							_react2.default.createElement(
-								'li',
-								null,
+									'li',
+									null,
+									_react2.default.createElement(
+										_reactRouter.Link,
+										{ to: '/login' },
+										'Login'
+									)
+								),
 								_react2.default.createElement(
-									_reactRouter.Link,
-									{ to: '/' },
-									'Register'
+									'li',
+									null,
+									_react2.default.createElement(
+										_reactRouter.Link,
+										{ to: '/register' },
+										'Register'
+									)
 								)
 							)
 						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'container' },
+					this.props.children
+				)
+			);
+		}
+	});
+
+/***/ },
+/* 224 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+		displayName: "Home",
+		render: function render() {
+			return _react2.default.createElement(
+				"div",
+				null,
+				_react2.default.createElement(
+					"h3",
+					null,
+					"Welcome"
+				),
+				_react2.default.createElement(
+					"p",
+					null,
+					"The following players are still alive"
+				),
+				_react2.default.createElement(
+					"table",
+					{ className: "table table-striped" },
+					_react2.default.createElement(
+						"thead",
+						null,
+						_react2.default.createElement(
+							"tr",
+							null,
+							_react2.default.createElement(
+								"th",
+								null,
+								"Name"
+							)
+						)
+					),
+					_react2.default.createElement(
+						"tbody",
+						null,
+						_react2.default.createElement(
+							"tr",
+							null,
+							_react2.default.createElement(
+								"td",
+								null,
+								"Jake"
+							)
+						)
+					)
+				)
+			);
+		}
+	});
+
+/***/ },
+/* 225 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+		displayName: "Register",
+		render: function render() {
+			return _react2.default.createElement(
+				"form",
+				null,
+				_react2.default.createElement(
+					"div",
+					{ className: "alert alert-danger row" },
+					_react2.default.createElement(
+						"span",
+						null,
+						"Error"
+					)
+				),
+				_react2.default.createElement(
+					"h3",
+					null,
+					"Register"
+				),
+				_react2.default.createElement(
+					"div",
+					{ className: "form-group" },
+					_react2.default.createElement(
+						"label",
+						{ "for": "name" },
+						"Name"
+					),
+					_react2.default.createElement("input", { type: "text", className: "form-control", placeholder: "John Smith" })
+				),
+				_react2.default.createElement(
+					"div",
+					{ className: "form-group" },
+					_react2.default.createElement(
+						"label",
+						{ "for": "username" },
+						"Username"
+					),
+					_react2.default.createElement("input", { type: "text", className: "form-control", placeholder: "JohnSmith" })
+				),
+				_react2.default.createElement(
+					"div",
+					{ className: "form-group" },
+					_react2.default.createElement(
+						"label",
+						{ "for": "password" },
+						"Password"
+					),
+					_react2.default.createElement("input", { type: "password", className: "form-control", placeholder: "Password" })
+				),
+				_react2.default.createElement(
+					"button",
+					{ type: "submit", className: "btn btn-default" },
+					"Register"
+				)
+			);
+		}
+	});
+
+/***/ },
+/* 226 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+		displayName: "LogIn",
+		render: function render() {
+			return _react2.default.createElement(
+				"form",
+				null,
+				_react2.default.createElement(
+					"div",
+					{ className: "alert alert-danger row" },
+					_react2.default.createElement(
+						"span",
+						null,
+						"Error"
+					)
+				),
+				_react2.default.createElement(
+					"h3",
+					null,
+					"Log In"
+				),
+				_react2.default.createElement(
+					"div",
+					{ className: "form-group" },
+					_react2.default.createElement(
+						"label",
+						{ "for": "username" },
+						"Username"
+					),
+					_react2.default.createElement("input", { type: "text", className: "form-control", placeholder: "xXx_DaNk_GuY_420_69_xXx" })
+				),
+				_react2.default.createElement(
+					"div",
+					{ className: "form-group" },
+					_react2.default.createElement(
+						"label",
+						{ "for": "password" },
+						"Password"
+					),
+					_react2.default.createElement("input", { type: "password", className: "form-control", placeholder: "Password" })
+				),
+				_react2.default.createElement(
+					"button",
+					{ type: "submit", className: "btn btn-default" },
+					"Log In"
+				)
+			);
+		}
+	});
+
+/***/ },
+/* 227 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+		displayName: "Me",
+		render: function render() {
+			return _react2.default.createElement(
+				"div",
+				null,
+				_react2.default.createElement(
+					"h3",
+					null,
+					"Hello, user.name "
+				),
+				_react2.default.createElement(
+					"p",
+					null,
+					_react2.default.createElement(
+						"strong",
+						null,
+						"Username:"
+					),
+					" user.username"
+				),
+				_react2.default.createElement(
+					"p",
+					null,
+					_react2.default.createElement(
+						"strong",
+						null,
+						"Target:"
+					),
+					"  user.target ? user.target.name : \"Nobody... yet...\" "
+				),
+				_react2.default.createElement(
+					"p",
+					null,
+					_react2.default.createElement(
+						"strong",
+						null,
+						"Codeword:"
+					),
+					" \" user.codeword \" (give this to the person who kills you)"
+				),
+				_react2.default.createElement(
+					"p",
+					null,
+					" user.alive ? \"You are still alive\" : \"You are dead. rip.\" "
+				),
+				_react2.default.createElement(
+					"div",
+					{ className: "alert alert-danger row" },
+					_react2.default.createElement(
+						"span",
+						null,
+						" message "
+					)
+				),
+				_react2.default.createElement(
+					"div",
+					{ className: "alert alert-success row" },
+					_react2.default.createElement(
+						"span",
+						null,
+						" message "
+					)
+				),
+				_react2.default.createElement(
+					"form",
+					{ className: "form-inline" },
+					_react2.default.createElement(
+						"div",
+						{ className: "form-group" },
+						_react2.default.createElement(
+							"label",
+							{ "for": "kill" },
+							"Killed someone? Put their codeword here: "
+						),
+						_react2.default.createElement("input", { type: "text", className: "form-control", placeholder: "e.g. wobbegong" })
+					),
+					_react2.default.createElement(
+						"button",
+						{ type: "submit", className: "btn btn-default" },
+						"Kill"
 					)
 				)
 			);
