@@ -9,8 +9,8 @@ export default React.createClass({
 	render() {
 		return (
 			<form>
-				<MessageBox type="danger" message={this.state.errorMessage}/>
 				<h3>Register</h3>
+				<MessageBox type="danger" message={this.state.errorMessage}/>
 				<div className="form-group">
 					<label for="name">Name</label>
 					<input type="text" className="form-control" placeholder="John Smith" />

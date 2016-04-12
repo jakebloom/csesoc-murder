@@ -34,10 +34,9 @@ export default React.createClass({
 				// TODO: Store JWT
 				// TODO: redirect to current user page
 			}.bind(this),
-			error: function(status, error) {
-				console.log("ERROR")
+			error: function(data) {
 				this.setState({
-					errorMessage: "Error",
+					errorMessage: data.responseJSON.message,
 					username: "",
 					password: ""
 				})
@@ -48,18 +47,19 @@ export default React.createClass({
 	render() {
 		return (
 			<form onSubmit={this.handleFormSubmit}>
-				<MessageBox type="danger" message={this.state.errorMessage}/>
-
 				<h3>Log In</h3>
+				<MessageBox type="danger" message={this.state.errorMessage}/>
 				<div className="form-group">
 					<label for="username">Username</label>
 					<input type="text" className="form-control" 
-					placeholder="xXx_DaNk_GuY_420_69_xXx" onChange={this.handleUsernameChange}/>
+					placeholder="xXx_DaNk_GuY_420_69_xXx" onChange={this.handleUsernameChange}
+					value={this.state.username}/>
 				</div>
 				<div className="form-group">
 					<label for="password">Password</label>
 					<input type="password" className="form-control" 
-					placeholder="Password" onChange={this.handlePasswordChange}/>
+					placeholder="Password" onChange={this.handlePasswordChange}
+					value={this.state.password}/>
 				</div>
 				<button type="submit" className="btn btn-default">Log In</button>
 			</form>
