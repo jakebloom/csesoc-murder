@@ -36,9 +36,7 @@ export default React.createClass({
 			}.bind(this),
 			error: function(data) {
 				this.setState({
-					errorMessage: data.responseJSON.message,
-					username: "",
-					password: ""
+					errorMessage: data.responseJSON.message
 				})
 			}.bind(this)
 		})
