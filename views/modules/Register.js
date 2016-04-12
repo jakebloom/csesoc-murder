@@ -5,7 +5,7 @@ export default React.createClass({
 	render() {
 		return (
 			<form>
-				<MessageBox type="danger" />
+				<MessageBox type="danger" message={this.state.errorMessage}/>
 				<h3>Register</h3>
 				<div className="form-group">
 					<label for="name">Name</label>
