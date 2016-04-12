@@ -6,8 +6,8 @@ export default React.createClass({
 		return (
 			<div>
 				<h3>Admin</h3>
-				<MessageBox className="alert-danger" />
-				<MessageBox className="alert-success" />
+				<MessageBox type="danger" />
+				<MessageBox type="success" />
 				
 				<div className="form-group">
 					<button className="btn btn-default btn-primary">Assign codewords</button>

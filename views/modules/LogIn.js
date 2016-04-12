@@ -1,12 +1,11 @@
 import React from 'react'
+import MessageBox from './MessageBox.js'
 
 export default React.createClass({
 	render() {
 		return (
 			<form>
-				<div className="alert alert-danger row">
-					<span>Error</span>
-				</div>
+				<MessageBox type="danger" />
 
 				<h3>Log In</h3>
 				<div className="form-group">
