@@ -6,8 +6,7 @@ export default React.createClass({
 	fetchPlayersFromServer() {
 		$.ajax({
 	      url: "/users/alive",
-	      dataType: 'json',
-	      cache: false,
+	      type: "GET",
 	      success: function(data) {
 	        this.setState({data: data});
 	      }.bind(this),
