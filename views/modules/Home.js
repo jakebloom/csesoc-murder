@@ -3,11 +3,7 @@ import AliveList from './AliveList.js'
 import $ from 'jquery'
 
 export default React.createClass({
-	getInitialState() {
-		return {data: []};
-	},
-
-	componentDidMount() {
+	fetchPlayersFromServer() {
 		$.ajax({
 	      url: "/users/alive",
 	      dataType: 'json',
@@ -18,7 +14,15 @@ export default React.createClass({
 	      error: function(xhr, status, err) {
 	        console.error(this.props.url, status, err.toString());
 	      }.bind(this)
-	   });
+	   })
+	},
+
+	getInitialState() {
+		return {data: []};
+	},
+
+	componentDidMount() {
+		this.fetchPlayersFromServer()
 	},
 
 	render() {

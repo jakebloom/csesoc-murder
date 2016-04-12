@@ -2,10 +2,14 @@ import React from 'react'
 import MessageBox from './MessageBox.js'
 
 export default React.createClass({
+	getInitialState() {
+		return {}
+	},
+
 	render() {
 		return (
 			<form>
-				<MessageBox type="danger" message="TEST"/>
+				<MessageBox type="danger" message={this.state.errorMessage}/>
 
 				<h3>Log In</h3>
 				<div className="form-group">

@@ -25,10 +25,10 @@ export default React.createClass({
 				target: {
 					name: "new"
 				},
-				codeword: "yo"
+				codeword: "yo",
+				alive: true
 			}
 		})
-		console.log(this.state)
 	},
 
 	render() {
@@ -42,10 +42,10 @@ export default React.createClass({
 				<MessageBox type={this.state.message.type} message={this.state.message.message} />
 				<form className="form-inline" >
 					<div className="form-group">
-						<label for="kill">Killed someone? Put their codeword here: </label>
+						<label for="kill" className="kill">Killed someone? Put their codeword here: </label>
 						<input type="text" className="form-control" placeholder="e.g. wobbegong" />
 					</div>
-					<button type="submit" className="btn btn-default">Kill</button>
+					<button type="submit" className="btn btn-default kill">Kill</button>
 				</form>			
 			</div>
 		)
