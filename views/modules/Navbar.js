@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router'
 
 export default React.createClass({
+	// TODO: Only render the relevant ones
 	render() {
 		return (
 			<div>

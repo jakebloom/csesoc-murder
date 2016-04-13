@@ -19,6 +19,7 @@ export default React.createClass({
 	},
 
 	componentDidMount(){
+		//TODO: Get this data
 		this.setState({
 			user: {
 				name: "Jake",
@@ -43,6 +44,9 @@ export default React.createClass({
 		$.ajax({
 			type: "POST",
 			url: "users/kill",
+			headers: {
+				Authorization: localStorage.token || ""
+			}
 			data: {
 				codeword: codeword
 			},

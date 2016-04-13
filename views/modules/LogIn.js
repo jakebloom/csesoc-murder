@@ -30,9 +30,8 @@ export default React.createClass({
 				password: password
 			},
 			success: function(data) {
-				console.log(data)
-				// TODO: Store JWT
-				// TODO: redirect to current user page
+				localStorage.setItem('jwt', data.token)
+				//TODO: Redirect to current user page
 			}.bind(this),
 			error: function(data) {
 				this.setState({
