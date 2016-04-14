@@ -3,6 +3,10 @@ import MessageBox from './MessageBox.js'
 import $ from 'jquery'
 
 export default React.createClass({
+	contextTypes: {
+		router: React.PropTypes.object
+	},
+
 	getInitialState() {
 		return {
 			user: {
@@ -19,19 +23,34 @@ export default React.createClass({
 	},
 
 	componentDidMount(){
-		//TODO: Get this data
-		this.setState({
-			user: {
-				name: "Jake",
-				username: "jake",
-				codeword: "word",
-				target: {
-					name: "new"
-				},
-				codeword: "yo",
-				alive: true
-			}
+		//TODO: Ensure this data is correct once we assign codewords and targets
+		$.ajax({
+			type: "GET",
+			url: "/users/me",
+			headers: {
+				Authorization: 'Bearer ' + localStorage.jwt || ""
+			},
+			success: function(data){
+				console.log(data)
+				this.setState({
+					user: {
+						name: data.name,
+						username: data.username,
+						codeword: data.codeword,
+						target: {
+							name: data.target
+						},
+						codeword: data.codeword,
+						alive: data.alive
+					}
+				})
+			}.bind(this),
+			error: function(data){
+				//If this is unsuccessful, we aren't logged in
+				this.context.router.push('/')
+			}.bind(this)
 		})
+		
 	},
 
 	handleKillwordChange(e) {
@@ -45,24 +64,29 @@ export default React.createClass({
 			type: "POST",
 			url: "users/kill",
 			headers: {
-				Authorization: localStorage.token || ""
-			}
+				Authorization: 'Bearer ' + localStorage.jwt || ""
+			},
 			data: {
 				codeword: codeword
 			},
 			success: function(data) {
 				console.log(data)
 				this.setState({
-					killword: ""
+					message: {
+						type: "success",
+						message: data.responseJSON.message
+					}
 				})
 				//TODO: test and set state appropriately
 			}.bind(this),
 			error: function(data) {
 				console.log(data)
 				this.setState({
-					killword: ""
+					message: {
+						type: "danger",
+						message: data.responseJSON.message
+					}
 				})
-				//TODO: test and set state appropriately
 			}.bind(this)
 		})
 	},

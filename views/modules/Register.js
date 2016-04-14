@@ -3,6 +3,10 @@ import MessageBox from './MessageBox.js'
 import $ from 'jquery'
 
 export default React.createClass({
+	contextTypes: {
+		router: React.PropTypes.object
+	},
+
 	getInitialState() {
 		return {
 			name: "",
@@ -39,7 +43,7 @@ export default React.createClass({
 			},
 			success: function(data) {
 				localStorage.setItem('jwt', data.token)
-				//TODO: Redirect to current user page
+				this.context.router.push('/me')
 			}.bind(this),
 			error: function(data) {
 				this.setState({
