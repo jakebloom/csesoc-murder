@@ -15,7 +15,10 @@ require('./models/User');
 require('./config/passport');
 
 //Connect to database
-mongoose.connect('mongodb://localhost/murder');
+var mongohost = process.env.NODE_ENV === "production" ? 
+              'mongodb://mongodb:27017/murder' : 
+              'mongodb://localhost/murder'
+mongoose.connect(mongohost);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
