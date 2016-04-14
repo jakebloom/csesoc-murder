@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var logger = require('morgan');
+var compression = require('compression');
 
 //Import user model
 require('./models/User');
@@ -22,7 +23,7 @@ var admin = require('./routes/admin');
 
 var app = express();
 
-// app.use(compression())
+app.use(compression())
 app.use(express.static(__dirname + '/public'));
 app.use(logger('dev'));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
