@@ -2,8 +2,28 @@ import React from 'react'
 import {Link} from 'react-router'
 
 export default React.createClass({
-	// TODO: Only render the relevant ones
+	logOut(){
+		delete localStorage.jwt
+	},
+
+	isLoggedIn(){
+		if (localStorage.jwt){
+			var payload = JSON.parse(atob(localStorage.jwt.split('.')[1]));
+			if (payload.exp > Date.now() / 1000) {
+				return true
+			}
+		}
+		return false
+	},
+
 	render() {
+		var buttons;
+		if (this.isLoggedIn()) {
+			buttons = <ul className="nav navbar-nav navbar-right"><li><Link to="/me">Me</Link></li><li><Link to="/" onClick={this.logOut}>Log Out</Link></li></ul>
+		} else {
+			buttons = <ul className="nav navbar-nav navbar-right"><li><Link to="/login">Login</Link></li><li><Link to="/register">Register</Link></li></ul>
+		}
+
 		return (
 			<div>
 				<nav className="navbar navbar-inverse navbar-fixed-top">
@@ -19,13 +39,7 @@ export default React.createClass({
 						</div>
 
 						<div className="collapse navbar-collapse">
-							<ul className="nav navbar-nav navbar-right">
-								<li><Link to="/admin">Admin</Link></li>
-								<li><Link to="/me">current user</Link></li>
-								<li><Link to="/">Log Out</Link></li>
-								<li><Link to="/login">Login</Link></li>
-								<li><Link to="/register">Register</Link></li>
-							</ul>
+								{buttons}
 						</div>
 					</div>
 				</nav>
@@ -34,6 +48,4 @@ export default React.createClass({
 		)
 	}
 })
-
-
 		
