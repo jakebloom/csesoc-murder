@@ -36,7 +36,31 @@ export default React.createClass({
 		})
 	},
 
-	startGame() {},
+	startGame() {
+		$.ajax({
+			type: "GET",
+			url: "/admin/start",
+			headers: {
+				Authorization: 'Bearer ' + localStorage.jwt || ""
+			},
+			success: function(data) {
+				this.setState({
+					message: {
+						type: "success",
+						message: data.message
+					}
+				})
+			}.bind(this),
+			error: function(data) {
+				this.setState({
+					message: {
+						type: "danger",
+						message: data.message
+					}
+				})				
+			}.bind(this)
+		})		
+	},
 
 	render() {
 		return (
@@ -48,7 +72,7 @@ export default React.createClass({
 					<button className="btn btn-default btn-primary" onClick={this.setCodewords}>Assign codewords</button>
 				</div>
 				<div className="form-group">
-					<button className="btn btn-default btn-danger">Start new game</button>
+					<button className="btn btn-default btn-danger" onClick={this.startGame}>Start new game</button>
 				</div>
 			</div>
 		)

@@ -23,7 +23,6 @@ export default React.createClass({
 	},
 
 	componentDidMount(){
-		//TODO: Ensure this data is correct once we assign codewords and targets
 		$.ajax({
 			type: "GET",
 			url: "/users/me",
@@ -31,15 +30,12 @@ export default React.createClass({
 				Authorization: 'Bearer ' + localStorage.jwt || ""
 			},
 			success: function(data){
-				console.log(data)
 				this.setState({
 					user: {
 						name: data.name,
 						username: data.username,
 						codeword: data.codeword,
-						target: {
-							name: data.target
-						},
+						target: data.target,
 						codeword: data.codeword,
 						alive: data.alive
 					}
@@ -70,14 +66,12 @@ export default React.createClass({
 				codeword: codeword
 			},
 			success: function(data) {
-				console.log(data)
 				this.setState({
 					message: {
 						type: "success",
-						message: data.responseJSON.message
+						message: data.message
 					}
 				})
-				//TODO: test and set state appropriately
 			}.bind(this),
 			error: function(data) {
 				console.log(data)
