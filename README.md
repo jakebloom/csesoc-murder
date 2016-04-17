@@ -4,24 +4,23 @@ This is CSESoc's online murder engine, which allows us to take our fun intra-soc
 
 
 ## Dependencies
-- nodejs (development)
-- mongodb (development)
+- vagrant (development)
 - docker (deployment)
 
 ## Deploying the latest official version
 Assuming that you have docker installed:
 
     $ docker run --name mongodb-container -d mongo
-    $ docker run -it --rm --name murder --link mongodb-container:mongodb -p 0.0.0.0:3000:3000 csesoc/murder
-    
-Then navigate to http://localhost:3000 or use your favourite web server to forward port 80 to port 3000 and expose the app to the internet!
+    $ docker run -d --name murder --link mongodb-container:mongodb -p 3000:3000 csesoc/murder
 
 ## Development
-Assuming that mongo is running:
 
     $ git clone
-    $ cd
-    $ npm install
+    $ cd murder
+    $ vagrant up
+    $ vagrant ssh
+    $ export MURDER_SECRET="Super Secret"
+    $ cd /vagrant
     $ npm start
-Then navigate to http://localhost:3000
 
+Then navigate to http://localhost:3000
