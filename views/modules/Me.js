@@ -55,7 +55,7 @@ export default React.createClass({
 
 	handleFormSubmit(e) {
 		e.preventDefault()
-		var codeword = this.state.killword.trim()
+		var codeword = this.state.killword.trim().toLowerCase()
 		$.ajax({
 			type: "POST",
 			url: "users/kill",
