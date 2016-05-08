@@ -9,19 +9,14 @@ export default React.createClass({
 
 	getInitialState() {
 		return {
-			name: "",
-			username: "",
+			zid: "",
 			errorMessage: "",
 			password: ""
 		}
 	},
 
-	handleNameChange(e) {
-		this.setState({name: e.target.value})
-	},
-
-	handleUsernameChange(e) {
-		this.setState({username: e.target.value})
+	handleZidChange(e) {
+		this.setState({zid: e.target.value})
 	},
 
 	handlePasswordChange(e) {
@@ -30,15 +25,13 @@ export default React.createClass({
 
 	handleFormSubmit(e) {
 		e.preventDefault()
-		var name = this.state.name.trim()
-		var username = this.state.username.trim()
+		var zid = this.state.zid.trim()
 		var password = this.state.password.trim()
 		$.ajax({
 			type: "POST",
 			url: "/users/register",
 			data: {
-				name: name,
-				username: username,
+				zid: zid,
 				password: password
 			},
 			success: function(data) {
@@ -59,22 +52,17 @@ export default React.createClass({
 				<h3>Register</h3>
 				<MessageBox type="danger" message={this.state.errorMessage}/>
 				<div className="form-group">
-					<label for="name">Name</label>
+					<label for="zid">zID</label>
 					<input type="text" className="form-control" 
-						placeholder="John Smith" onChange={this.handleNameChange}
-						value={this.state.name}/>
-				</div>
-				<div className="form-group">
-					<label for="username">Username</label>
-					<input type="text" className="form-control" 
-						placeholder="JohnSmith" onChange={this.handleUsernameChange}
-						value={this.state.username}/>
+						placeholder="z1234567" onChange={this.handleZidChange}
+						value={this.state.zid}/>
 				</div>
 				<div className="form-group">
 					<label for="password">Password</label>
 					<input type="password" className="form-control" 
 						placeholder="Password" onChange={this.handlePasswordChange}
 						value={this.state.password}/>
+					<p class="help-block">For security reasons, this is a unique password for murder@CSE.</p>
 				</div>
 				<button type="submit" className="btn btn-default">Register</button>
 			</form>

@@ -9,13 +9,13 @@ export default React.createClass({
 
 	getInitialState() {
 		return {
-			username: "",
+			zid: "",
 			password: ""
 		}
 	},
 
-	handleUsernameChange(e) {
-		this.setState({username: e.target.value})
+	handleZidChange(e) {
+		this.setState({zid: e.target.value})
 	},
 
 	handlePasswordChange(e) {
@@ -24,13 +24,13 @@ export default React.createClass({
 
 	handleFormSubmit(e) {
 		e.preventDefault();
-		var username = this.state.username.trim()
+		var zid = this.state.zid.trim()
 		var password = this.state.password.trim()
 		$.ajax({
 			type: "POST",
 			url: "/users/login",
 			data: {
-				username: username,
+				zid: zid,
 				password: password
 			},
 			success: function(data) {
@@ -51,10 +51,10 @@ export default React.createClass({
 				<h3>Log In</h3>
 				<MessageBox type="danger" message={this.state.errorMessage}/>
 				<div className="form-group">
-					<label for="username">Username</label>
+					<label for="zid">zID</label>
 					<input type="text" className="form-control" 
-					placeholder="xXx_DaNk_GuY_420_69_xXx" onChange={this.handleUsernameChange}
-					value={this.state.username}/>
+					placeholder="z1234567" onChange={this.handleZidChange}
+					value={this.state.zid}/>
 				</div>
 				<div className="form-group">
 					<label for="password">Password</label>

@@ -23,7 +23,8 @@
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-router": "^2.0.1",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "unsw-ldap": "0.0.2"
   },
   "devDependencies": {
     "babel-core": "^6.5.1",

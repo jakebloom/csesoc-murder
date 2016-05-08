@@ -9,6 +9,8 @@ var auth = jwt({secret: process.env.MURDER_SECRET, userProperty: 'payload'});
 
 var passport = require('passport');
 
+var unsw = require('unsw-ldap');
+
 /* Get players who are still alive*/
 router.get('/alive', function(req, res, next){
 	User.find({alive: true}).select('name').exec(function(err, users){
@@ -70,26 +72,32 @@ router.post('/kill', auth, function(req, res, next){
 
 /* create a new user */
 router.post('/register', function(req, res, next){
-	if(!req.body.username || !req.body.password){
+	if(!req.body.zid || !req.body.password){
 		return res.status(400).json({message: 'Please fill out all fields'});
 	}
 
-	var user = new User();
+	unsw.getUserName(req.body.zid).then(function(name){
+		if (name.length === 0){
+			return res.status(400).json({message: "Sorry, we couldn't find a user for that zID"});
+		}
 
-	user.username = req.body.username;
-	user.name = req.body.name;
+		var user = new User();
 
-	user.setPassword(req.body.password)
+		user.zid = req.body.zid;
+		user.name = name[0];
 
-	user.save(function (err){
-		if(err){ return next(err); }
+		user.setPassword(req.body.password)
 
-		return res.json({token: user.generateJWT()});
+		user.save(function (err){
+			if(err){ return next(err); }
+
+			return res.json({token: user.generateJWT()});
+		});
 	});
 });
 
 router.post('/login', function(req, res, next){
-	if(!req.body.username || !req.body.password){
+	if(!req.body.zid || !req.body.password){
 		return res.status(400).json({message: 'Please fill out all fields'});
 	}
 
