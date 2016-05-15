@@ -1,6 +1,7 @@
 import React from 'react'
 import MessageBox from './MessageBox.js'
 import $ from 'jquery'
+import LaddaButton from 'react-ladda'
 
 export default React.createClass({
 	contextTypes: {
@@ -11,8 +12,13 @@ export default React.createClass({
 		return {
 			zid: "",
 			errorMessage: "",
-			password: ""
+			password: "",
+			loading: false
 		}
+	},
+
+	toggle() {
+		this.setState({loading: !this.state.loading})
 	},
 
 	handleZidChange(e) {
@@ -25,6 +31,7 @@ export default React.createClass({
 
 	handleFormSubmit(e) {
 		e.preventDefault()
+		this.toggle()
 		var zid = this.state.zid.trim()
 		var password = this.state.password.trim()
 		$.ajax({
@@ -40,7 +47,8 @@ export default React.createClass({
 			}.bind(this),
 			error: function(data) {
 				this.setState({
-					errorMessage: data.responseJSON.message
+					errorMessage: data.responseJSON.message,
+					loading: false
 				})
 			}.bind(this)
 		})
@@ -64,7 +72,10 @@ export default React.createClass({
 						value={this.state.password}/>
 					<p class="help-block">For security reasons, this is a unique password for murder@CSE.</p>
 				</div>
-				<button type="submit" className="btn btn-default">Register</button>
+				<LaddaButton type="submit" className="btn btn-default"
+						loading={this.state.loading} buttonStyle="zoom-out">
+					Register
+				</LaddaButton>
 			</form>
 		)
 	}
