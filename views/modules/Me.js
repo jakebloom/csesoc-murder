@@ -33,7 +33,7 @@ export default React.createClass({
 				this.setState({
 					user: {
 						name: data.name,
-						username: data.username,
+						zid: data.zid,
 						codeword: data.codeword,
 						target: data.target,
 						codeword: data.codeword,
@@ -89,7 +89,7 @@ export default React.createClass({
 		return (
 			<div>
 				<h3>Hello, {this.state.user.name} </h3>
-				<p><strong>Username:</strong> {this.state.user.username}</p>
+				<p><strong>zID:</strong> {this.state.user.zid}</p>
 				<p><strong>Target:</strong>  {this.state.user.target ? this.state.user.target.name : "Nobody... yet..."} </p>
 				<p><strong>Codeword:</strong> &quot;{this.state.user.codeword}&quot; (give this to the person who kills you)</p>
 				<p> {this.state.user.alive ? "You are still alive" : "You are dead. rip."} </p>

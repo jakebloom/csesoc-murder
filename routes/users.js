@@ -22,8 +22,8 @@ router.get('/alive', function(req, res, next){
 
 /* view yourself */
 router.get('/me', auth, function(req, res, next){
-	var username = req.payload.username;
-	User.findOne({'username': username}).lean().populate('target', 'name').exec(
+	var zid = req.payload.zid;
+	User.findOne({'zid': zid}).lean().populate('target', 'name').exec(
 		function(err, user){
 			if (err){return next(err);}
 
@@ -34,9 +34,9 @@ router.get('/me', auth, function(req, res, next){
 
 /* Kill your target */
 router.post('/kill', auth, function(req, res, next){
-	var username = req.payload.username;
+	var zid = req.payload.zid;
 
-	User.findOne({'username': username}).populate('target').exec(function(err, user){
+	User.findOne({'zid': zid}).populate('target').exec(function(err, user){
 		if (err){return next(err);}
 	
 		if (!user.target){
