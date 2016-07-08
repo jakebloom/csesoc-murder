@@ -76,24 +76,23 @@ router.post('/register', function(req, res, next){
 		return res.status(400).json({message: 'Please fill out all fields'});
 	}
 
-	unsw.getUserName(req.body.zid).then(function(name){
-		if (name.length === 0){
-			return res.status(400).json({message: "Sorry, we couldn't find a user for that zID"});
+	unsw.getUserName(req.body.zid, req.body.password).then(
+		function(name){
+			var user = new User();
+
+			user.zid = req.body.zid;
+			user.name = name;
+
+			user.save(function (err){
+				if(err){ return next(err); }
+
+				return res.json({token: user.generateJWT()});
+			});
+		},
+		function(){
+			return res.status(400).json({message: 'Invalid zID or zPass'});
 		}
-
-		var user = new User();
-
-		user.zid = req.body.zid;
-		user.name = name[0];
-
-		user.setPassword(req.body.password)
-
-		user.save(function (err){
-			if(err){ return next(err); }
-
-			return res.json({token: user.generateJWT()});
-		});
-	});
+	);
 });
 
 router.post('/login', function(req, res, next){

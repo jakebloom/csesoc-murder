@@ -25,7 +25,7 @@
     "react-ladda": "^4.0.2",
     "react-router": "^2.0.1",
     "serve-favicon": "~2.3.0",
-    "unsw-ldap": "0.0.2"
+    "unsw-ldap": "0.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.5.1",

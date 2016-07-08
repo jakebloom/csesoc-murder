@@ -66,11 +66,10 @@ export default React.createClass({
 						value={this.state.zid}/>
 				</div>
 				<div className="form-group">
-					<label for="password">Password</label>
+					<label for="password">zPass</label>
 					<input type="password" className="form-control" 
 						placeholder="Password" onChange={this.handlePasswordChange}
 						value={this.state.password}/>
-					<p class="help-block">For security reasons, this is a unique password for murder@CSE.</p>
 				</div>
 				<LaddaButton type="submit" className="btn btn-default"
 						loading={this.state.loading} buttonStyle="zoom-out">
