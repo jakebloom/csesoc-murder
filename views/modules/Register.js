@@ -1,5 +1,6 @@
 import React from 'react'
 import MessageBox from './MessageBox.js'
+import ProfilePic from './ProfilePic.js'
 import $ from 'jquery'
 import LaddaButton from 'react-ladda'
 
@@ -13,7 +14,8 @@ export default React.createClass({
 			zid: "",
 			errorMessage: "",
 			password: "",
-			loading: false
+			loading: false,
+			pic: null
 		}
 	},
 
@@ -70,6 +72,9 @@ export default React.createClass({
 					<input type="password" className="form-control" 
 						placeholder="Password" onChange={this.handlePasswordChange}
 						value={this.state.password}/>
+				</div>
+				<div className="form-group">
+					<ProfilePic />
 				</div>
 				<LaddaButton type="submit" className="btn btn-default"
 						loading={this.state.loading} buttonStyle="zoom-out">
