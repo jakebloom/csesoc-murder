@@ -11,6 +11,9 @@ var compression = require('compression');
 //Import user model
 require('./models/User');
 
+//Import Kills model
+require('./models/Kill')
+
 //Get the passport config
 require('./config/passport');
 
@@ -23,6 +26,7 @@ mongoose.connect(mongohost);
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var admin = require('./routes/admin');
+var kills = require('./routes/kills');
 
 var app = express();
 
@@ -41,6 +45,7 @@ app.set('view engine', 'ejs');
 app.use('/', routes);
 app.use('/users', users);
 app.use('/admin', admin);
+app.use('/kills', kills);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

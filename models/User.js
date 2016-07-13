@@ -5,8 +5,6 @@ var jwt = require('jsonwebtoken');
 var UserSchema = new mongoose.Schema({
 	name: String,
 	zid: {type: String, lowercase: true, unique: true},
-	hash: String,
-	salt: String,
 	codeword: String,
 	target: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
 	alive: { type: Boolean, default: true },

@@ -7,6 +7,8 @@ var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var auth = jwt({secret: process.env.MURDER_SECRET, userProperty: 'payload'});
 
+var Kill = mongoose.model('Kill');
+
 var passport = require('passport');
 
 var unsw = require('unsw-ldap');
@@ -62,12 +64,18 @@ router.post('/kill', auth, function(req, res, next){
 			user.save(function(err){
 				if (err){return next(err);}
 
-				return res.status(200).json({message: "Target is dead. Press f to pay respects."});
+				var killing = new Kill();
+				killing.killer = user;
+				killing.victim = target;
+
+				killing.save(function(err){
+					if (err){return next(err);}
+
+					return res.status(200).json({message: "Target is dead. Press f to pay respects."});
+				});
 			});
 		});
-
 	});
-
 });
 
 /* create a new user */
