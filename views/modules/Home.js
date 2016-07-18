@@ -19,7 +19,7 @@ export default React.createClass({
 
 	fetchKillsFromServer() {
 		$.ajax({
-			url: "/kills/10",
+			url: "/kills/20",
 			type: "GET",
 			success: function(data) {
 				this.setState({kills: data})
@@ -42,8 +42,18 @@ export default React.createClass({
 	render() {
 		return(
 			<div>
-				<h3>Welcome</h3>
-				<p>The following players are still alive</p>
+				<h1>CSESoc Murder</h1>
+				<h3>Rules</h3>
+				<ul>
+					<li>When the game starts, you will be given a target and a codeword</li>
+					<li>You must find your target and "kill" them</li>
+					<li>You can kill someone by saying "you're dead" to them where nobody else can hear you</li>
+					<li>Bathrooms and areas within five metres of bathrooms are out of bounds</li>
+					<li>If you are killed, you must give your codeword to your killer</li>
+					<li>Once you kill somebody and get their codeword, enter it on the "Me" page to recieve your new target</li>
+					<li>The aim of the game is to meet new people and make friends, so be kind to your killers and consider getting coffee with them!</li>
+				</ul>
+				<h3>The following players are still alive</h3>
 				<table className="table table-striped">
 					<thead>
 						<tr>
@@ -52,6 +62,7 @@ export default React.createClass({
 					</thead>
 						<AliveList data={this.state.users} />
 				</table>
+				<h3>Latest Kills</h3>
 				<table className="table table-striped">
 					<thead>
 						<tr>

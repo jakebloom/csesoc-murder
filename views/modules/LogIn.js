@@ -57,7 +57,7 @@ export default React.createClass({
 					value={this.state.zid}/>
 				</div>
 				<div className="form-group">
-					<label for="password">Password</label>
+					<label for="password">zPass</label>
 					<input type="password" className="form-control" 
 					placeholder="Password" onChange={this.handlePasswordChange}
 					value={this.state.password}/>
