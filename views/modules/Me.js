@@ -46,7 +46,6 @@ export default React.createClass({
 				this.context.router.push('/')
 			}.bind(this)
 		})
-		
 	},
 
 	handleKillwordChange(e) {
@@ -72,6 +71,7 @@ export default React.createClass({
 						message: data.message
 					}
 				})
+				this.componentDidMount()
 			}.bind(this),
 			error: function(data) {
 				console.log(data)
