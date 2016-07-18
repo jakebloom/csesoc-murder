@@ -1,5 +1,6 @@
 import React from 'react'
 import AliveList from './AliveList.js'
+import KillList from './KillList.js'
 import $ from 'jquery'
 
 export default React.createClass({
@@ -8,7 +9,7 @@ export default React.createClass({
 	      url: "/users/alive",
 	      type: "GET",
 	      success: function(data) {
-	        this.setState({data: data});
+	        this.setState({users: data});
 	      }.bind(this),
 	      error: function(xhr, status, err) {
 	        console.error(this.props.url, status, err.toString());
@@ -16,12 +17,26 @@ export default React.createClass({
 	   })
 	},
 
+	fetchKillsFromServer() {
+		$.ajax({
+			url: "/kills/10",
+			type: "GET",
+			success: function(data) {
+				this.setState({kills: data})
+			}.bind(this),
+			error: function(xhr, status, err) {
+	        	console.error(this.props.url, status, err.toString());
+	      	}.bind(this)
+		})
+	},
+
 	getInitialState() {
-		return {data: []};
+		return {users: [], kills: []}
 	},
 
 	componentDidMount() {
 		this.fetchPlayersFromServer()
+		this.fetchKillsFromServer()
 	},
 
 	render() {
@@ -35,7 +50,17 @@ export default React.createClass({
 							<th>Name</th>
 						</tr>
 					</thead>
-						<AliveList data={this.state.data} />
+						<AliveList data={this.state.users} />
+				</table>
+				<table className="table table-striped">
+					<thead>
+						<tr>
+							<th>Killer</th>
+							<th>Victim</th>
+							<th>Time</th>
+						</tr>
+					</thead>
+						<KillList data={this.state.kills} />
 				</table>
 			</div>
 		)

@@ -24,6 +24,7 @@
     "react-dom": "^15.0.1",
     "react-ladda": "^4.0.2",
     "react-router": "^2.0.1",
+    "react-time": "^4.2.0",
     "serve-favicon": "~2.3.0",
     "unsw-ldap": "0.1.0"
   },
