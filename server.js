@@ -19,7 +19,7 @@ require('./config/passport');
 
 //Connect to database
 var mongohost = process.env.NODE_ENV === "production" ? 
-              'mongodb://mongodb:27017/murder' : 
+              process.env.MONGO_URL : 
               'mongodb://localhost/murder'
 mongoose.connect(mongohost);
 
