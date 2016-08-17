@@ -32,7 +32,7 @@ var app = express();
 
 app.use(compression())
 app.use(express.static(__dirname + '/public'));
-app.use(logger('dev'));
+app.use(logger('combined'));
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
